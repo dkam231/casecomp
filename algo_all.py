@@ -260,30 +260,51 @@ for p in ["WTI", "WTS"]:
                       for L in buy_locations for S in sell_options 
                       for m in months for n in months if month_index[n] >= month_index[m] and xminus[p][L][S][m][n].varValue is not None)
     print(f"{p} Summary: Total Long = {total_long:,.0f} barrels, Total Short = {total_short:,.0f} barrels")
-print("\nMonthly Position Summary:")
+print("\nMonthly Position Summary with Costs and P&L:")
+
+running_pnl = {"WTI": 0.0, "WTS": 0.0}
+
 for p in ["WTI", "WTS"]:
     print(f"\nProduct: {p}")
     for t in months:
-        # Compute open long positions (inventory held as of end of month t)
+        month_idx = month_index[t]
         open_inventory = 0
-        for L in buy_locations:
-            for S in sell_options:
-                for m in months:
-                    for n in months:
-                        if month_index[m] <= month_index[t] < month_index[n]:
-                            val = xplus[p][L][S][m][n].varValue
-                            if val is not None:
-                                open_inventory += val
-
-        # Compute open short positions (uncovered shorts as of end of month t)
         open_short = 0
+        inventory_cost = 0.0
+        realized_profit = 0.0
+
         for L in buy_locations:
             for S in sell_options:
                 for m in months:
+                    m_idx = month_index[m]
                     for n in months:
-                        if month_index[m] <= month_index[t] < month_index[n]:
-                            val = xminus[p][L][S][m][n].varValue
-                            if val is not None:
-                                open_short += val
+                        n_idx = month_index[n]
 
-        print(f"  End of {t}: Open Long Position = {open_inventory:,.0f} barrels, Open Short Position = {open_short:,.0f} barrels")
+                        # Safely check if variable exists (from previous filtering)
+                        val_plus = xplus[p][L][S][m][n].varValue if n in xplus[p][L][S][m] else None
+                        val_minus = xminus[p][L][S][m][n].varValue if n in xminus[p][L][S][m] else None
+
+                        # Open inventory (long)
+                        if m_idx <= month_idx < n_idx and val_plus is not None:
+                            open_inventory += val_plus
+                            months_held = month_idx - m_idx
+                            if months_held >= 0:
+                                inventory_cost += storage_cost * val_plus
+
+                        # Open short
+                        if m_idx <= month_idx < n_idx and val_minus is not None:
+                            open_short += val_minus
+
+                        # Trade settles this month
+                        if n_idx == month_idx:
+                            if val_plus is not None:
+                                realized_profit += profit_long(p, m, n, L, S) * val_plus
+                            if val_minus is not None:
+                                realized_profit += profit_short(p, m, n, L, S) * val_minus
+
+        running_pnl[p] += realized_profit - inventory_cost
+        print(f"  End of {t}:")
+        print(f"    Open Long Position = {open_inventory:,.0f} barrels; Storage Cost = ${inventory_cost:,.2f}")
+        print(f"    Open Short Position = {open_short:,.0f} barrels")
+        print(f"    Realized Profit This Month = ${realized_profit:,.2f}")
+        print(f"    Running Cumulative P&L = ${running_pnl[p]:,.2f}")
