@@ -1,0 +1,44 @@
+Total Maximum Profit: $14,510,415.33
+
+Trade allocations for WTI:
+  LONG: Buy WTI in September at M and Sell in September via M: 1,680,000 barrels; Profit per barrel: $0.0000
+  LONG: Buy WTI in October at M and Sell in October via M: 1,760,000 barrels; Profit per barrel: $0.0000
+  LONG: Buy WTI in May at M and Sell in June via R: 1,600,000 barrels; Profit per barrel: $0.5500
+  SHORT: Sell WTI in June at H and Cover in June via M: 80,000 barrels; Profit per barrel: $1.7929
+  SHORT: Sell WTI in June at H and Cover in December via M: 1,600,000 barrels; Profit per barrel: $2.8029
+  SHORT: Sell WTI in July at H and Cover in November via M: 1,680,000 barrels; Profit per barrel: $2.3831
+  SHORT: Sell WTI in July at H and Cover in December via M: 80,000 barrels; Profit per barrel: $2.6431
+  SHORT: Sell WTI in August at H and Cover in August via M: 1,640,000 barrels; Profit per barrel: $1.1427
+  LONG: Buy WTI in August at H and Sell in August via H: 40,000 barrels; Profit per barrel: $0.0000
+
+Trade allocations for WTS:
+  LONG: Buy WTS in August at M and Sell in August via M: 13,333 barrels; Profit per barrel: $0.0000
+  LONG: Buy WTS in October at M and Sell in October via M: 433,333 barrels; Profit per barrel: $0.0000
+  LONG: Buy WTS in May at M and Sell in July via R: 400,000 barrels; Profit per barrel: $0.7220
+  SHORT: Sell WTS in June at H and Cover in June via M: 420,000 barrels; Profit per barrel: $2.0414
+  SHORT: Sell WTS in July at H and Cover in November via M: 20,000 barrels; Profit per barrel: $2.1813
+  SHORT: Sell WTS in July at H and Cover in December via M: 420,000 barrels; Profit per barrel: $2.4413
+  SHORT: Sell WTS in August at H and Cover in October via M: 6,667 barrels; Profit per barrel: $1.4609
+  SHORT: Sell WTS in August at H and Cover in November via M: 400,000 barrels; Profit per barrel: $1.7209
+  LONG: Buy WTS in September at H and Sell in September via H: 420,000 barrels; Profit per barrel: $0.0000
+
+Monthly Capacities:
+  WTI:
+    May: 1,600,000 barrels
+    June: 1,680,000 barrels
+    July: 1,760,000 barrels
+    August: 1,680,000 barrels
+    September: 1,680,000 barrels
+    October: 1,760,000 barrels
+    November: 1,680,000 barrels
+    December: 1,680,000 barrels
+  WTS:
+    May: 400,000 barrels
+    June: 420,000 barrels
+    July: 440,000 barrels
+    August: 420,000 barrels
+    September: 420,000 barrels
+    October: 440,000 barrels
+    November: 420,000 barrels
+    December: 420,000 barrels
+14510415.33338198
